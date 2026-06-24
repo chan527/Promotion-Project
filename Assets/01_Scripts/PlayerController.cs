@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -86,6 +87,22 @@ public class PlayerController : MonoBehaviour
         {
             groundCheck = true;
             playerAnimator.SetTrigger("doLand");
+
+            StartCoroutine(LandingStopCoroutine());
         }
+    }
+
+    /// <summary>
+    /// 착지 중에 움직이지 못하도록 애니메이터 ApplyRootMotion을 true로 설정
+    /// 대기 시간은 착지 애니메이션 진입, 탈출 transition의 TransitionDuration의 합으로 설정
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator LandingStopCoroutine()
+    {
+        playerAnimator.applyRootMotion = true;
+
+        yield return new WaitForSeconds(0.4f);
+
+        playerAnimator.applyRootMotion = false;
     }
 }
