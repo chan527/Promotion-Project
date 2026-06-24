@@ -345,8 +345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2995c61b00f1474ab1a23a383ec4a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 0
-  jumpPower: 0
+  speed: 5
+  jumpPower: 5
   playerAnimator: {fileID: 284237782}
 --- !u!95 &284237782 stripped
 Animator:

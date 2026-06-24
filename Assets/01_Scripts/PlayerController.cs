@@ -4,12 +4,13 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private float speed;
+    private float speed = 5f;
     [SerializeField]
-    private float jumpPower;
+    private float jumpPower = 5f;
 
-    // 중복 점프를 막기위한 현재 점프 중인지 체크하는 변수
-    private bool isJump;
+    // 중복 점프를 막기위한 현재 ground에 있는지 체크하는 변수
+    [SerializeField]
+    private bool groundCheck;
 
     [SerializeField]
     Animator playerAnimator;
@@ -23,10 +24,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        speed = 5f;
-        jumpPower = 3f;
-
-        isJump = false;
+        groundCheck = true;
     }
 
     void Update()
@@ -71,12 +69,13 @@ public class PlayerController : MonoBehaviour
 
         rigidbody.linearVelocity = move;
         
-        // 스페이스바를 누르고 현재 점프 중이 아니라면 점프 실행
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && !isJump)
+        // 스페이스바를 누르고 현재 ground 라면 점프 실행
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && groundCheck)
         {
             rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-            isJump = true;
+            groundCheck = false;
             playerAnimator.SetTrigger("doJump");
+            playerAnimator.ResetTrigger("doLand");
         }
 
     }
@@ -85,7 +84,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
-            isJump = false;
+            groundCheck = true;
             playerAnimator.SetTrigger("doLand");
         }
     }
