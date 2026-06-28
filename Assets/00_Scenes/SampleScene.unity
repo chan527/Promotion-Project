@@ -257,7 +257,7 @@ Transform:
   m_GameObject: {fileID: 269358712}
   serializedVersion: 2
   m_LocalRotation: {x: 0.10452846, y: 0, z: 0, w: 0.9945219}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -277,7 +277,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraMove
   target: {fileID: 284237783}
-  offset: {x: 0, y: 2, z: 0}
+  mouseSensitivityX: 0
+  mouseSensitivityY: 0
+  scrollSensitivity: 0
+  distance: 0
+  offset: {x: 0, y: 1.5, z: 0}
+  camera: {fileID: 0}
 --- !u!1 &284237776 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
@@ -329,6 +334,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   playerAnimator: {fileID: 284237782}
+  camera: {fileID: 269358713}
 --- !u!95 &284237782 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
@@ -446,7 +452,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
