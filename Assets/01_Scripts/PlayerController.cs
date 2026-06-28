@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Animator playerAnimator;
 
+    [SerializeField]
+    Transform camera;
+
     Vector3 moveDir;
 
     Rigidbody rigidbody;
@@ -37,24 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         CheckGround();
 
-        moveDir = Vector3.zero;
-
-        if (Keyboard.current.wKey.isPressed)
-        {
-            moveDir += Vector3.forward;
-        }
-        if (Keyboard.current.sKey.isPressed)
-        {
-            moveDir += Vector3.back;
-        }
-        if (Keyboard.current.aKey.isPressed)
-        {
-            moveDir += Vector3.left;
-        }
-        if (Keyboard.current.dKey.isPressed)
-        {
-            moveDir += Vector3.right;
-        }
+        SetMoveDirection();
 
         Move(moveDir);
 
@@ -86,6 +72,30 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("isGround", groundCheck);
     }
 
+    private void SetMoveDirection()
+    {
+        moveDir = Vector3.zero;
+
+        if (Keyboard.current.wKey.isPressed)
+        {
+            moveDir += camera.forward;
+        }
+        if (Keyboard.current.sKey.isPressed)
+        {
+            moveDir -= camera.forward;
+        }
+        if (Keyboard.current.dKey.isPressed)
+        {
+            moveDir += camera.right;
+        }
+        if (Keyboard.current.aKey.isPressed)
+        {
+            moveDir -= camera.right;
+        }
+
+
+    }
+
     private void Move(Vector3 moveDir)
     {
         // 이동 입력이 있으면 isRun true로 설정
@@ -97,6 +107,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             playerAnimator.SetBool("isRun", false);
+            return;
         }
 
         // xz 축 이동만 구함
