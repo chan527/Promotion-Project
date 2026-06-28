@@ -93,7 +93,8 @@ public class PlayerController : MonoBehaviour
             moveDir -= camera.right;
         }
 
-
+        // y축 방향은 0로 다시 설정
+        moveDir = new Vector3(moveDir.x, 0, moveDir.z).normalized;
     }
 
     private void Move(Vector3 moveDir)
