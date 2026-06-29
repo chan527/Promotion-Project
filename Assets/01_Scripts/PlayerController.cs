@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
         SetMoveDirection();
 
-        Move(moveDir);
+        Move();
 
         // 스페이스바를 누르고 현재 ground 라면 점프 실행
         if (Keyboard.current.spaceKey.wasPressedThisFrame && groundCheck)
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
         moveDir = new Vector3(moveDir.x, 0, moveDir.z).normalized;
     }
 
-    private void Move(Vector3 moveDir)
+    private void Move()
     {
         // 이동 입력이 있으면 isRun true로 설정
         if (moveDir != Vector3.zero)
@@ -108,7 +108,10 @@ public class PlayerController : MonoBehaviour
         else
         {
             playerAnimator.SetBool("isRun", false);
-            return;
+
+            // 움직임 입력 없을 때 멈추기
+            // rigidbody.linearVelocity = Vector3.zero;
+            
         }
 
         // xz 축 이동만 구함
