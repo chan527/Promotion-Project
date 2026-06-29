@@ -56,7 +56,7 @@ public class CameraArmController : MonoBehaviour
         yRotation += rotationDeltaY;
 
         // x축 회전은 최대, 최소를 정함
-        xRotation = Mathf.Clamp(xRotation, -20f, 80f);
+        xRotation = Mathf.Clamp(xRotation, -15f, 80f);
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
 
