@@ -47,8 +47,8 @@ public class CameraArmController : MonoBehaviour
     private void Update()
     {
         // 마우스의 상하 움직임은 x축 회전을 변화시키고 좌우 움직임은 y축 회전을 변화시킴
-        float rotationDeltaX = Mouse.current.delta.value.y * mouseSensitivityY;
-        float rotationDeltaY = Mouse.current.delta.value.x * mouseSensitivityX;
+        float rotationDeltaX = Mouse.current.delta.ReadValue().y * mouseSensitivityY;
+        float rotationDeltaY = Mouse.current.delta.ReadValue().x * mouseSensitivityX;
 
         // 현재 회전 각도를 계속 업데이트
         // x축 회전은 마우스 이동과 반대방향으로 업데이트
@@ -58,7 +58,7 @@ public class CameraArmController : MonoBehaviour
         // x축 회전은 최대, 최소를 정함
         xRotation = Mathf.Clamp(xRotation, -15f, 80f);
 
-        float scrollDelta = Mouse.current.scroll.value.y * scrollSensitivity;
+        float scrollDelta = Mouse.current.scroll.ReadValue().y * scrollSensitivity;
 
         cameraPosZ = Mathf.Clamp(cameraPosZ + scrollDelta, -5f, -1.5f);
 
