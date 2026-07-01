@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     Vector3 moveDir;
 
+    bool canMove;
+
     Rigidbody rigidbody;
 
     private void Start()
@@ -38,7 +41,7 @@ public class PlayerController : MonoBehaviour
         SetMoveDirection();
 
         // 스페이스바를 누르고 현재 ground 라면 점프 실행
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && groundCheck)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && groundCheck && canMove)
         {
             Jump();
         }
@@ -46,7 +49,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (canMove)
+            Move();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -138,11 +142,11 @@ public class PlayerController : MonoBehaviour
     /// <returns></returns>
     IEnumerator LandingStopCoroutine()
     {
-        playerAnimator.applyRootMotion = true;
+        canMove = false;
 
         yield return new WaitForSeconds(0.4f);
 
-        playerAnimator.applyRootMotion = false;
+        canMove = true;
     }
 
     private void OnDrawGizmos()
