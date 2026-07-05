@@ -21,17 +21,17 @@ public class PlayerController : MonoBehaviour
     Animator playerAnimator;
 
     [SerializeField]
-    Transform camera;
+    Transform cameraArm;
 
     Vector3 moveDir;
 
     bool canMove;
 
-    Rigidbody rigidbody;
+    Rigidbody rb;
 
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -41,7 +41,9 @@ public class PlayerController : MonoBehaviour
         SetMoveDirection();
 
         // 스페이스바를 누르고 현재 ground 라면 점프 실행
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && groundCheck && canMove)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame 
+            && groundCheck 
+            && canMove)
         {
             Jump();
         }
@@ -66,9 +68,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void CheckGround()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, 0.1f, groundLayer);
-
-        groundCheck = hits.Length == 0 ? false : true;
+        groundCheck = Physics.CheckSphere(transform.position, 0.1f, groundLayer);
 
         playerAnimator.SetBool("isGround", groundCheck);
     }
@@ -83,19 +83,19 @@ public class PlayerController : MonoBehaviour
 
         if (Keyboard.current.wKey.isPressed)
         {
-            moveDir += camera.forward;
+            moveDir += cameraArm.forward;
         }
         if (Keyboard.current.sKey.isPressed)
         {
-            moveDir -= camera.forward;
+            moveDir -= cameraArm.forward;
         }
         if (Keyboard.current.dKey.isPressed)
         {
-            moveDir += camera.right;
+            moveDir += cameraArm.right;
         }
         if (Keyboard.current.aKey.isPressed)
         {
-            moveDir -= camera.right;
+            moveDir -= cameraArm.right;
         }
 
         // y축 방향은 0로 다시 설정
@@ -119,11 +119,11 @@ public class PlayerController : MonoBehaviour
         }
 
         // xz 축 속도만 구하고 y 축은 기존 속도 유지
-        Vector3 move = rigidbody.linearVelocity;
+        Vector3 move = rb.linearVelocity;
         move.x = moveDir.x * speed;
         move.z = moveDir.z * speed;
 
-        rigidbody.linearVelocity = move;
+        rb.linearVelocity = move;
 
         // 이동방향으로 시선 돌리기
         transform.LookAt(transform.position + moveDir);
@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         playerAnimator.SetTrigger("doJump");
     }
 

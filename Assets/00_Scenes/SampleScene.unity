@@ -282,7 +282,7 @@ MonoBehaviour:
   scrollSensitivity: 0
   distance: 0
   offset: {x: 0, y: 1.5, z: 0}
-  camera: {fileID: 0}
+  cam: {fileID: 330585546}
 --- !u!1 &284237776 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}
@@ -334,7 +334,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   playerAnimator: {fileID: 284237782}
-  camera: {fileID: 269358713}
+  cameraArm: {fileID: 0}
 --- !u!95 &284237782 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 1841c298173cdad4db8df8602c8f1c8d, type: 3}

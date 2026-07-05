@@ -26,11 +26,11 @@ public class CameraArmController : MonoBehaviour
     private Vector3 offset;
 
     [SerializeField]
-    private Transform camera;
+    private Transform cam;
 
     private void Start()
     {
-        camera = transform.GetChild(0);
+        cam = transform.GetChild(0);
         Cursor.lockState = CursorLockMode.Locked;
 
         mouseSensitivityX = 0.1f;
@@ -41,7 +41,7 @@ public class CameraArmController : MonoBehaviour
         yRotation = transform.rotation.eulerAngles.y;
 
         scrollSensitivity = 0.3f;
-        cameraPosZ = camera.localPosition.z;
+        cameraPosZ = cam.localPosition.z;
     }
 
     private void Update()
@@ -70,7 +70,7 @@ public class CameraArmController : MonoBehaviour
 
         transform.position = target.position + offset;
 
-        camera.localPosition = new Vector3(camera.localPosition.x, camera.localPosition.y, cameraPosZ);
+        cam.localPosition = new Vector3(cam.localPosition.x, cam.localPosition.y, cameraPosZ);
     }
 
 
